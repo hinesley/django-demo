@@ -52,3 +52,11 @@ jobs:
 
       - name: Tear down services
         run: docker compose down
+
+      - name: Push docker images
+        if: ${{ github.ref_name == 'main' || github.ref_name == 'staging' }}
+        run:  |
+          docker tag \
+            django-demo-web:latest \
+            bhinesley/django-demo-web:${{ github.ref_name }}
+          docker push bhinesley/django-demo-web:${{ github.ref_name }}
