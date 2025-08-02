@@ -30,6 +30,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Update packages
+        run: |
+          apt update
+          apt upgrade pam
+
       - name: List versions
         run: |
           docker version
