@@ -32,8 +32,8 @@ jobs:
 
       - name: Update packages
         run: |
-          sudo apt-get update
-          sudo apt-get upgrade libpam-modules-bin
+          apt update
+          apt upgrade pam
 
       - name: List versions
         run: |
