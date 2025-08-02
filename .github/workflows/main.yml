@@ -53,10 +53,17 @@ jobs:
       - name: Tear down services
         run: docker compose down
 
-      - name: Push docker images
+      - name: Log in to Docker Hub
+        if: ${{ github.ref_name == 'main' || github.ref_name == 'staging' }}
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_SECRET }}
+
+      - name: Push images to Docker Hub
         if: ${{ github.ref_name == 'main' || github.ref_name == 'staging' }}
         run:  |
           docker tag \
             django-demo-web:latest \
-            bhinesley/django-demo-web:${{ github.ref_name }}
-          docker push bhinesley/django-demo-web:${{ github.ref_name }}
+            bhinesley/django-demo:${{ github.ref_name }}
+          docker push bhinesley/django-demo:${{ github.ref_name }}
