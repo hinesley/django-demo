@@ -1,5 +1,5 @@
 asgiref==3.9.1
 Django==5.2.4
-gunicorn==23.0.0
 psycopg[binary]==3.2.9
 sqlparse==0.5.3
+uvicorn==0.35.0
