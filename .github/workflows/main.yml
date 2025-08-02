@@ -37,11 +37,14 @@ jobs:
       - name: Bring up services
         run: docker compose up -d
 
-      - name: Run db migrations
+      - name: Migrate db
         run: docker compose exec web python manage.py migrate
 
-      - name: Run tests
-        run: echo "TODO"
+      - name: Django check
+        run: docker compose exec web python manage.py check
+
+      - name: Django tests
+        run: docker compose exec web python manage.py tests
 
       - name: Tear down services
         run: docker compose down
